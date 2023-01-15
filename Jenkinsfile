@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Manual Approval'){
             steps {
-                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Lanjutkan', submitter: 'Abort'
+                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', submitter: 'Abort'
                 
             }
         }
