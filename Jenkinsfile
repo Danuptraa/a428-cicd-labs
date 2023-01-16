@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh './jenkins/scripts/deliver.sh'
                 echo 'Melakukan deploy dan automatis mati 1 menit'
-                sleep 1m
+                sleep(time: 1, unit: 'MINUTES')
                 sh './jenkins/scripts/kill.sh'
             }
         }
