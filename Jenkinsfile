@@ -1,35 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-buster-slim' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent any
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                sh 'npm install' 
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh 'npm test'
             }
         }
-        stage('Manual Approval'){
+        stage('Deploy') {
             steps {
-                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed', submitter: 'Abort'
-                
-            }
-        }
-        stage('Deploy'){
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-                echo 'Melakukan deploy dan automatis mati 1 menit'
-                sleep(time: 1, unit: 'MINUTES')
-                sh './jenkins/scripts/kill.sh'
+                sh 'npm run deploy'
             }
         }
     }
-    
 }
