@@ -1,5 +1,5 @@
 pipeline {
-    agent node:16-buster-slim
+    agent any
     stages {
         stage('Build') {
             steps {
